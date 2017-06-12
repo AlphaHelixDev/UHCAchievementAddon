@@ -1,0 +1,5 @@
+name: Achievements
+author: AlphaHelix
+version: 1.0
+description: Adding Achievements to UHC
+main: de.alphahelix.achievementaddon.AchievementAddon
