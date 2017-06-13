@@ -20,15 +20,13 @@ public class AchievementOptions {
     }
 
     public String getJustUnlocked(Achievement a) {
-        return justUnlocked.replace("[achievement", a.getName());
+        return justUnlocked.replace("[achievement", a.name);
     }
 
-    public String getLocked() {
-        return locked;
-    }
-
-    public String getUnlocked() {
-        return unlocked;
+    String getLockingStatus(boolean unlocked) {
+        if (!unlocked)
+            return this.locked;
+        return this.unlocked;
     }
 
     public SimpleFile.InventoryItem getIcon() {

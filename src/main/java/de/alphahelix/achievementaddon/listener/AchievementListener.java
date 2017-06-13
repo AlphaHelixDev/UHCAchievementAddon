@@ -30,6 +30,7 @@ public class AchievementListener extends SimpleListener {
             if (!stats.hasCustomStatistic(Achievement.DRAGON_SLAYER)) {
                 stats.addCustomStatistic(Achievement.DRAGON_SLAYER);
                 e.getEntity().getKiller().sendMessage(UHC.getGameOptions().getChatPrefix() + AchievementAddon.getAchievementOptions().getJustUnlocked(Achievement.DRAGON_SLAYER));
+                StatsUtil.pushCache(e.getEntity().getKiller());
             }
         } else if (e.getEntityType() == EntityType.PLAYER) {
             if (e.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.FIRE ||
@@ -38,11 +39,13 @@ public class AchievementListener extends SimpleListener {
                 if(!stats.hasCustomStatistic(Achievement.BURN_BABY_BURN)) {
                     stats.addCustomStatistic(Achievement.BURN_BABY_BURN);
                     e.getEntity().getKiller().sendMessage(UHC.getGameOptions().getChatPrefix() + AchievementAddon.getAchievementOptions().getJustUnlocked(Achievement.BURN_BABY_BURN));
+                    StatsUtil.pushCache(e.getEntity().getKiller());
                 }
             } else if (e.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION) {
                 if (!stats.hasCustomStatistic(Achievement.SENOR_BOOM_BOOM)) {
                     stats.addCustomStatistic(Achievement.SENOR_BOOM_BOOM);
                     e.getEntity().getKiller().sendMessage(UHC.getGameOptions().getChatPrefix() + AchievementAddon.getAchievementOptions().getJustUnlocked(Achievement.SENOR_BOOM_BOOM));
+                    StatsUtil.pushCache(e.getEntity().getKiller());
                 }
             }
 
@@ -50,6 +53,7 @@ public class AchievementListener extends SimpleListener {
                 if(!stats.hasCustomStatistic(Achievement.SLAYER)) {
                     stats.addCustomStatistic(Achievement.SLAYER);
                     e.getEntity().getKiller().sendMessage(UHC.getGameOptions().getChatPrefix() + AchievementAddon.getAchievementOptions().getJustUnlocked(Achievement.SLAYER));
+                    StatsUtil.pushCache(e.getEntity().getKiller());
                 }
             }
         }
@@ -64,6 +68,7 @@ public class AchievementListener extends SimpleListener {
         if(!stats.hasCustomStatistic(Achievement.OMG_DIAMONDS)) {
             stats.addCustomStatistic(Achievement.OMG_DIAMONDS);
             e.getPlayer().sendMessage(UHC.getGameOptions().getChatPrefix() + AchievementAddon.getAchievementOptions().getJustUnlocked(Achievement.OMG_DIAMONDS));
+            StatsUtil.pushCache(e.getPlayer());
         }
     }
 
@@ -77,6 +82,7 @@ public class AchievementListener extends SimpleListener {
         if(!stats.hasCustomStatistic(Achievement.HIGHWAY_TO_HELL)) {
             stats.addCustomStatistic(Achievement.HIGHWAY_TO_HELL);
             e.getPlayer().sendMessage(UHC.getGameOptions().getChatPrefix() + AchievementAddon.getAchievementOptions().getJustUnlocked(Achievement.HIGHWAY_TO_HELL));
+            StatsUtil.pushCache(e.getPlayer());
         }
     }
 
@@ -92,6 +98,7 @@ public class AchievementListener extends SimpleListener {
         if(!stats.hasCustomStatistic(Achievement.GLOWING_IN_THE_DARK)) {
             stats.addCustomStatistic(Achievement.GLOWING_IN_THE_DARK);
             e.getEnchanter().sendMessage(UHC.getGameOptions().getChatPrefix() + AchievementAddon.getAchievementOptions().getJustUnlocked(Achievement.GLOWING_IN_THE_DARK));
+            StatsUtil.pushCache(e.getEnchanter());
         }
     }
 }

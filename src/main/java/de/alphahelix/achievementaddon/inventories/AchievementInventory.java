@@ -63,6 +63,7 @@ public class AchievementInventory {
         }
 
         inventories.put(p.getName(), ib.build());
+        p.openInventory(inventories.get(p.getName()));
     }
 
 }

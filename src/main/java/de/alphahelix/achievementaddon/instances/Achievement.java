@@ -1,8 +1,10 @@
 package de.alphahelix.achievementaddon.instances;
 
+import com.google.gson.JsonElement;
+import de.alphahelix.achievementaddon.AchievementAddon;
+import de.alphahelix.alphalibary.file.SimpleJSONFile;
 import de.alphahelix.alphalibary.item.ItemBuilder;
 import de.alphahelix.uhcremastered.instances.CustomStatistic;
-import de.alphahelix.uhcremastered.register.Register;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -23,22 +25,15 @@ public class Achievement extends CustomStatistic implements Serializable {
     public static final Achievement SENOR_BOOM_BOOM = new Achievement("SENOR_BOOM_BOOM", "Senor boom boom", new ItemStack(Material.TNT), "Placeholder", "Lore");
 
     private String fileName;
-    private String name;
+    String name;
     private ItemStack icon;
     private ArrayList<String> description = new ArrayList<>();
 
-    public Achievement(String fileName, String name, ItemStack icon, String... description) {
+    private Achievement(String fileName, String name, ItemStack icon, String... description) {
         this.fileName = fileName;
         this.name = name;
         this.icon = icon;
         Collections.addAll(this.description, description);
-    }
-
-    public Achievement(String fileName, String name, ItemStack icon, ArrayList<String> description) {
-        this.fileName = fileName;
-        this.name = name;
-        this.icon = icon;
-        this.description = description;
     }
 
     public static boolean isAchievement(Achievement a, Achievement b) {
@@ -92,13 +87,9 @@ public class Achievement extends CustomStatistic implements Serializable {
     }
 
     public void copyFrom(Achievement achievement) {
-        this.name = achievement.getName();
+        this.name = achievement.name;
         this.icon = achievement.getIcon(false, false);
-        this.description = achievement.getDescription();
-    }
-
-    public String getName() {
-        return name;
+        this.description = achievement.description;
     }
 
     public ItemStack getIcon(boolean unlocked, boolean lore) {
@@ -106,16 +97,12 @@ public class Achievement extends CustomStatistic implements Serializable {
 
         if (lore) {
             desc.add(0, " ");
-            desc.add(1, Register.getMessageFile().getLockedStatus(unlocked));
+            desc.add(1, AchievementAddon.getAchievementOptions().getLockingStatus(unlocked));
             desc.add(2, " ");
         }
 
-        return new ItemBuilder(icon).setName(getName()).setLore(desc.toArray(new String[desc.size()]))
+        return new ItemBuilder(icon).setName(name).setLore(desc.toArray(new String[desc.size()]))
                 .addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE).build();
-    }
-
-    public ArrayList<String> getDescription() {
-        return description;
     }
 
     @Override
@@ -128,4 +115,8 @@ public class Achievement extends CustomStatistic implements Serializable {
                 '}';
     }
 
+    @Override
+    public JsonElement toFileValue() {
+        return SimpleJSONFile.gson.toJsonTree(this);
+    }
 }
