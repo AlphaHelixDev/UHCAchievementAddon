@@ -29,7 +29,7 @@ public class AchievementInventory {
             public void onClick(PlayerInteractEvent e) {
                 if (!GState.is(GState.LOBBY)) return;
                 if (e.getItem() == null) return;
-                if(Util.isSame(e.getItem(), AchievementAddon.getAchievementOptions().getIcon().getItemStack())) return;
+                if(!Util.isSame(e.getItem(), AchievementAddon.getAchievementOptions().getIcon().getItemStack())) return;
 
                 openInv(e.getPlayer());
             }
